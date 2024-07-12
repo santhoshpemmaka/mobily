@@ -5,3 +5,8 @@
 3. The application is designed to be responsive for different screen sizes.
    
 Tech Stack: ReactJS, NodeJS, MongoDB, SCSS
+
+
+* front-end application deployment:- https://mobily.onrender.com
+
+* back-end application deployment:-  https://mobily-1.onrender.com/
