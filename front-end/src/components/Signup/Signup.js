@@ -27,9 +27,16 @@ const SignUp = () => {
 				firstName: signupDetails.firstName,
 				lastName: signupDetails.lastName,
 			});
-			if (response.status === 200 || response.status === 201) {
+            if (response.status === 200 || response.status === 201) {
+                localStorage?.setItem(
+					"token",
+					JSON.stringify({
+						token: response?.data?.token,
+						
+					})
+				);
                 setshowLoader((prev) => !prev);
-                navigation("/");
+                navigation("/?auth=true");
 
 			} else {
 				throw new Error("Failed to signup");

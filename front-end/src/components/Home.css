@@ -80,8 +80,7 @@
 
 @media only screen and (max-width: 768px) {
 	.container {
-		height: 100vh;
-		overflow-y: auto;
+		margin-bottom: 4rem;
 	}
 	.container::-webkit-scrollbar {
 		display: none;

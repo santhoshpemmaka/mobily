@@ -15,7 +15,6 @@ app.use(cors());
 
 
 app.get("/", (req, res) => {
-    console.log("-----reached");
     return res.status(200).json({
         healtht: "UP"
     })

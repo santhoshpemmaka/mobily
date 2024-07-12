@@ -3,7 +3,9 @@ import axios from "axios";
 import "./Home.css";
 
 import {v4 as uuid} from "uuid";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import MainSubComponent from "./MainComponent";
+
 
 const Home = () => {
 	const navigate = useNavigate();
@@ -32,7 +34,6 @@ const Home = () => {
             data: ""
 		});
 	};
-    console.log("keepNote --->", keepNote);
     return (
         <div className="container-todo">
 		    <div className='container'>
@@ -78,6 +79,7 @@ const Home = () => {
                 </div>
                            
             </div>
+        <MainSubComponent/>
         </div>
 	);
 };

@@ -1,18 +1,36 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./Header.scss";
-import {Link,  useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
+
 const Home = () => {
 	const [showNav, setshowNav] = useState(false);
-	const navigate = useNavigate();
-    let token = "";
-    let userName = "";
+    const [token, setToken] = useState('');
+    let query = useQuery();
+    const name = query.get("auth");
+
+    useEffect(() => {
+        const userToken = JSON.parse(localStorage.getItem('token'));
+        setToken(userToken);
+    }, [name]);
+
 	const navItems = [
-		{text: "Profile", link: token ? "/profile" : "/login", hideInDesktop: true},
+		{text: "Home", link: token ? "/" : "/login", hideInDesktop: true},
 	];
 
 	const navHandler = () => {
 		setshowNav((prev) => !prev);
-	};
+    };
+    
+    const logoutHandler = () => {
+        localStorage.removeItem("token");
+        setToken("");
+    }
 
     return (
         <div className="container1">
@@ -67,22 +85,23 @@ const Home = () => {
 
                     <div className='right-sideheader'>
                         <ul className='ul-tag-header ul-right'>
-                            {token ? (
-                                <li className='li-tag-header hide-in-mobile'>
-                                    <Link className='a-tag-header-right' to='/profile'>
+                            {token ?
+                                <>
+                                <li className='li-tag-header hide-in-mobile' onClick={logoutHandler} >
+                                    <Link className='a-tag-header-right' to='/login'>
                                         <i className='fas fa-user header-icon'></i>
-                                        <span>Hi,{userName}</span>
+                                        <span>Logout</span>
                                     </Link>
                                 </li>
-                            ) : (
+                                </> 
+                                :
                                 <li className='li-tag-header hide-in-mobile'>
                                     <Link className='a-tag-header-right' to='/login'>
                                         <i className='fas fa-user header-icon'></i>
                                         <span>Login</span>
                                     </Link>
                                 </li>
-                            )}
-                            
+                            }  
                         </ul>
                     </div>
                 </div>

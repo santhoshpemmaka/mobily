@@ -23,8 +23,15 @@ const Login = () => {
 				email: loginDetails.username,
 				password: loginDetails.password,
 			});
-			if (response.status === 200 || response.status === 201) {
-                navigation("/");
+            if (response.status === 200 || response.status === 201) {
+                localStorage?.setItem(
+					"token",
+					JSON.stringify({
+						token: response?.data?.token,
+						
+					})
+				);
+                navigation("/?auth=true");
                 setshowLoader((prev) => !prev);
 			} else {
 				throw new Error("Failed to login");
