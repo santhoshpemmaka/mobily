@@ -17,8 +17,22 @@ const Login = () => {
 	});
 
 
-	const btnHandler = () => {
-		setloginMessage((prev) => !prev);
+	const btnHandler = async() => {
+        try {
+			const response = await axios.post("https://mobily-1.onrender.com/api/v1/signin", {
+				email: loginDetails.username,
+				password: loginDetails.password,
+			});
+			if (response.status === 200 || response.status === 201) {
+                navigation("/");
+                setshowLoader((prev) => !prev);
+			} else {
+				throw new Error("Failed to login");
+			}
+		} catch (error) {
+            console.log(error);
+            setloginMessage((prev) => !prev);
+		}
 	};
 	const iconHandler = () => {
 		setloginDetails({
@@ -26,38 +40,7 @@ const Login = () => {
 			shownPassword: !loginDetails.shownPassword,
 		});
 	};
-	const userloginHandler = async (dispatch, loginDetails) => {
-		try {
-			const response = await axios.post("/api/auth/login", {
-				email: loginDetails.email,
-				password: loginDetails.password,
-			});
-			if (response.status === 200 || response.status === 201) {
-				localStorage?.setItem(
-					"userSession",
-					JSON.stringify({
-						userName: response?.data?.foundUser?.firstName,
-						token: response?.data?.encodedToken,
-						email: response?.data?.foundUser?.email,
-					})
-				);
-				setshowLoader((prev) => !prev);
-				
-				navigation("/");
-			} else {
-				throw new Error("Failed to login");
-			}
-		} catch (error) {
-			console.log(error);
-		}
-	};
-	const testHandler = () => {
-		setloginDetails({
-			...loginDetails,
-			username: "test@gmail.com",
-			password: "12345",
-		});
-	};
+	
 	return (
 		<>
 			<div className='login-container'>

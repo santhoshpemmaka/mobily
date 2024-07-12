@@ -23,7 +23,7 @@ routes.get("/", async(req,res) => {
     }
 });
 
-routes.post("/",authMiddleware,async(req,res) => {
+routes.post("/",async(req,res) => {
     try{
         const {title,description,dueDate} = req.body;
         if(!title || !description || !dueDate){

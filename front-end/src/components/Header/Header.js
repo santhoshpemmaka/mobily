@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "./Header.scss";
-import {Link, NavLink, useNavigate} from "react-router-dom";
+import {Link,  useNavigate} from "react-router-dom";
 const Home = () => {
 	const [showNav, setshowNav] = useState(false);
 	const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Home = () => {
                         <i className='fas fa-bars menu-icon' onClick={navHandler}></i>
                         <div className='header-logo show-in-mobile'>
                             <Link to='/' className='header-logo-name'>
-                                <label>NAMASTE</label>
+                                <label>Mobily</label>
                             </Link>
                         </div>
 
@@ -60,7 +60,7 @@ const Home = () => {
                     </div>
                     <div className='header-logo hide-in-mobile'>
                         <Link to='/' className='header-logo-name'>
-                            <label>NAMASTE</label>
+                            <label>Mobily</label>
                         </Link>
                     </div>
                     

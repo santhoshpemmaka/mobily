@@ -84,7 +84,7 @@
 	color: #ff4f6c;
 }
 .right-sideheader {
-	width: 50%;
+	width: 10%;
 	display: flex;
 	align-items: center;
 }
@@ -92,30 +92,7 @@
 	justify-content: space-around;
 	margin-right: 3rem;
 }
-.search-bar {
-	display: flex;
-	align-items: center;
-	width: 100%;
-	border-radius: 0.3rem;
-	border: 1px solid #e6e6e6;
-	justify-content: space-between;
-	color: rgb(105, 110, 121);
-	background-color: rgb(245, 245, 246);
-	margin-right: 5rem;
-}
-.search-icon {
-	font-size: 2rem;
-	padding: 1rem 1.6rem;
-}
-.search-text {
-	border: none;
-	width: calc(100% - 2rem);
-	padding: 1rem 1.6rem;
-	outline: none;
-	color: var(--primary-text-color);
-	background-color: inherit;
-	font-size: 1.6rem;
-}
+
 .a-tag-header-right {
 	display: flex;
 	flex-direction: column;
@@ -136,24 +113,7 @@
 .card-header {
 	position: relative;
 }
-.cart-number,
-.wishlist-number {
-	width: 2.5rem;
-	height: 2.5rem;
-	background: var(--primary-color);
-	position: absolute;
-	top: -0.5rem;
-	right: 0.2rem;
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	border: 2px solid var(--border-color);
-	justify-content: center;
-	color: var(--complimentary-text-color) !important;
-}
-.wishlist-number {
-	right: 10rem;
-}
+
 .navbar-logo {
 	left: 0;
 	margin: 1rem 0rem;

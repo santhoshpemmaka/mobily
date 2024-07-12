@@ -19,54 +19,33 @@ const SignUp = () => {
 		shownPassword: false,
 	});
 
-
-	const usersignupHandler = async ( signupDeatils) => {
+	const signupHandler = async() => {
 		try {
-			const response = await axios.post("/api/auth/signup", {
-				email: signupDeatils.emailName,
-				passWord: signupDeatils.passWord,
-				firstName: signupDeatils.firstName,
-				lastName: signupDeatils.lastName,
+			const response = await axios.post("https://mobily-1.onrender.com/api/v1/signup", {
+				email: signupDetails.emailName,
+				password: signupDetails.passWord,
+				firstName: signupDetails.firstName,
+				lastName: signupDetails.lastName,
 			});
 			if (response.status === 200 || response.status === 201) {
-				localStorage?.setItem(
-					"userSession",
-					JSON.stringify({
-						userName: response?.data?.createdUser?.firstName,
-						token: response?.data?.encodedToken,
-						email: response?.data?.createdUser.email,
-						lastName: response?.data?.lastName,
-					})
-				);
-				setshowLoader((prev) => !prev);
+                setshowLoader((prev) => !prev);
+                navigation("/");
+
 			} else {
 				throw new Error("Failed to signup");
 			}
 		} catch (error) {
 			console.log(error);
 		}
-	};
-
-	const signupHandler = () => {
-		const {emailName, passWord, firstName, lastName} = signupDetails;
-		if (
-			emailName !== "" &&
-			passWord !== "" &&
-			firstName !== "" &&
-			lastName !== ""
-		) {
-			setshowLoader((prev) => !prev);
-			usersignupHandler(signupDetails);
-		}
 		setsignupMessage((prev) => !prev);
 	};
 
-	const iconHandler = () => {
+    const iconHandler = () => {
 		setsignupDetails({
 			...signupDetails,
 			shownPassword: !signupDetails.shownPassword,
 		});
-	};
+    };
 	return (
 		<div className='signup-container'>
 			<div className='spacer-3rem'></div>
@@ -137,7 +116,7 @@ const SignUp = () => {
 						<label className='label-signup-name'>Password </label>
 						<div className='show-password'>
 							<input
-								type='password'
+								type={signupDetails.shownPassword ? "text" : "password"}
 								value={signupDetails.passWord}
 								className='signup-input'
 								placeholder='Enter new password'
