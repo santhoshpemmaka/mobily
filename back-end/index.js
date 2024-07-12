@@ -22,7 +22,27 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1",userRoutes);
-app.use("/api/v1",todoRoutes);
+app.use("/api/v1", todoRoutes);
+// To reduce preflight deplay add logic
+
+const corsOptions = {
+    optionsSuccessStatus: 204,
+  };
+  app.options("*", cors(corsOptions)); // Enable preflight requests for all routes
+  app.use(cors(corsOptions)); // Enable CORS for all routes
+  app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "*");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  
+    // Set caching headers for preflight response
+    if (req.method === "OPTIONS") {
+      res.header("Access-Control-Max-Age", "86400"); // Cache preflight response for 1 hour (in seconds)
+    }
+    req.next();
+});
+  
+mongoose.set("strictQuery", false); // overcome deploy error
 
 
 mongoose.connect(mognooseURI).then(() => {
