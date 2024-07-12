@@ -31,12 +31,6 @@ routes.post("/",async(req,res) => {
                 message : "Give me all input mandatory fields"
             })
         }
-        const userId = req.userId;
-        if(!userId){
-            return res.status(411).json({
-                message : "Error occured while create todo list"
-            })
-        }
         const createTodo = await Todo.create({
             title,
             description,
